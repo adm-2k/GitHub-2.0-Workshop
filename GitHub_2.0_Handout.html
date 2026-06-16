@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub 2.0: The Handoff — Workshop Handout</title>
+<style>
+  @page {
+    size: letter;
+    margin: 0.5in 0.55in;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FAF3EB;
+    --terracotta: #B85042;
+    --terracotta-light: #C96B5E;
+    --sand: #E7C39A;
+    --sand-light: #F0DCC0;
+    --sage: #A7BEAE;
+    --sage-dark: #7A9E87;
+    --brown-dark: #3D2B1F;
+    --brown-mid: #5C4033;
+    --brown-light: #8B7355;
+    --off-white: #FFF8F0;
+  }
+
+  body {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.38;
+    color: var(--brown-dark);
+    background: var(--cream);
+  }
+
+  .page {
+    width: 7.4in;
+    min-height: 9.8in;
+    max-height: 10in;
+    padding: 0;
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+  .page:last-child { page-break-after: avoid; }
+
+  /* Header */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2.5px solid var(--terracotta);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  .page-header h1 {
+    font-family: Cambria, Georgia, serif;
+    font-size: 16pt;
+    color: var(--terracotta);
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .page-header .subtitle {
+    font-size: 8.5pt;
+    color: var(--brown-light);
+    font-style: italic;
+  }
+  .page-label {
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--brown-light);
+    margin-bottom: 2px;
+  }
+
+  /* Loop diagram */
+  .loop-diagram {
+    background: var(--off-white);
+    border: 1.5px solid var(--sand);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 8.5pt;
+    line-height: 1.5;
+  }
+  .loop-diagram .flow-line {
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    color: var(--brown-mid);
+    white-space: pre;
+  }
+  .loop-diagram .loop-note {
+    font-size: 8pt;
+    color: var(--terracotta);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* Section headings */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    margin-top: 10px;
+  }
+  .section-head:first-child { margin-top: 0; }
+  .round-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 11pt;
+    flex-shrink: 0;
+  }
+  .round-badge.r1 { background: var(--terracotta); }
+  .round-badge.r2 { background: var(--brown-mid); }
+  .round-badge.r3 { background: var(--sage-dark); }
+  .section-head h2 {
+    font-family: Cambria, Georgia, serif;
+    font-size: 12pt;
+    color: var(--brown-dark);
+  }
+  .section-head .time {
+    font-size: 7.5pt;
+    color: var(--brown-light);
+    margin-left: auto;
+  }
+
+  /* Step lists */
+  .steps {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .step {
+    flex: 1;
+    background: var(--off-white);
+    border: 1px solid var(--sand);
+    border-radius: 5px;
+    padding: 5px 7px;
+  }
+  .step-num {
+    font-weight: 700;
+    font-size: 10pt;
+    color: var(--terracotta);
+    margin-bottom: 1px;
+  }
+  .step-title {
+    font-weight: 700;
+    font-size: 8.5pt;
+    color: var(--brown-dark);
+    margin-bottom: 2px;
+  }
+  .step-detail {
+    font-size: 8pt;
+    color: var(--brown-mid);
+    line-height: 1.3;
+  }
+
+  /* Prompt block */
+  .prompt-block {
+    background: var(--brown-dark);
+    color: #F0E6D8;
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 7.8pt;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .prompt-block .blank {
+    color: var(--sand);
+    border-bottom: 1px dashed var(--sand);
+    padding: 0 2px;
+  }
+
+  /* Change menu */
+  .change-menu {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .menu-option {
+    flex: 1;
+    border-radius: 5px;
+    padding: 6px 8px;
+    border: 1.5px solid;
+  }
+  .menu-option.opt1 {
+    background: #FFF8F0;
+    border-color: var(--sage);
+  }
+  .menu-option.opt2 {
+    background: #FFF8F0;
+    border-color: var(--sand);
+  }
+  .menu-option.opt3 {
+    background: #FFF8F0;
+    border-color: var(--terracotta-light);
+  }
+  .menu-option .opt-header {
+    font-weight: 700;
+    font-size: 8.5pt;
+    margin-bottom: 2px;
+  }
+  .menu-option .opt-body {
+    font-size: 7.8pt;
+    line-height: 1.3;
+    color: var(--brown-mid);
+  }
+
+  /* Tip callout */
+  .tip {
+    background: var(--terracotta);
+    color: white;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 8.5pt;
+    line-height: 1.35;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .tip-icon { font-size: 11pt; flex-shrink: 0; margin-top: -1px; }
+  .tip-text { flex: 1; }
+  .tip-text strong { color: var(--sand-light); }
+
+  /* Checkpoint */
+  .checkpoint {
+    background: var(--brown-dark);
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 8.5pt;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .checkpoint-icon { font-size: 10pt; }
+
+  /* Protocol */
+  .protocol-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    margin-bottom: 8px;
+  }
+  .protocol-table td {
+    padding: 5px 8px;
+    vertical-align: top;
+    font-size: 8.8pt;
+    line-height: 1.35;
+  }
+  .protocol-table .rule-num {
+    width: 24px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 10pt;
+    color: white;
+    border-radius: 4px 0 0 4px;
+  }
+  .protocol-table .rule-num.warm { background: var(--terracotta); }
+  .protocol-table .rule-num.earth { background: var(--brown-mid); }
+  .protocol-table .rule-num.green { background: var(--sage-dark); }
+  .protocol-table .rule-text {
+    background: var(--off-white);
+    border-radius: 0 4px 4px 0;
+    border: 1px solid var(--sand);
+    border-left: none;
+  }
+  .protocol-table .rule-text strong {
+    color: var(--brown-dark);
+  }
+
+  /* Troubleshoot */
+  .trouble-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .trouble-item {
+    background: var(--off-white);
+    border: 1px solid var(--sand);
+    border-radius: 4px;
+    padding: 5px 7px;
+  }
+  .trouble-item .problem {
+    font-weight: 700;
+    font-size: 8pt;
+    color: var(--terracotta);
+    margin-bottom: 2px;
+  }
+  .trouble-item .fix {
+    font-size: 7.8pt;
+    color: var(--brown-mid);
+    line-height: 1.3;
+  }
+
+  /* Next steps */
+  .next-steps {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .next-step {
+    flex: 1;
+    background: var(--sage);
+    color: var(--brown-dark);
+    border-radius: 5px;
+    padding: 6px 8px;
+  }
+  .next-step .ns-num {
+    font-weight: 700;
+    font-size: 10pt;
+    color: white;
+  }
+  .next-step .ns-title {
+    font-weight: 700;
+    font-size: 8.5pt;
+    margin-bottom: 2px;
+  }
+  .next-step .ns-detail {
+    font-size: 7.8pt;
+    line-height: 1.3;
+  }
+
+  /* Shortcut callout */
+  .shortcut-bar {
+    background: var(--sand-light);
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .shortcut-bar .keys {
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--brown-dark);
+    white-space: nowrap;
+  }
+  .shortcut-bar .desc {
+    font-size: 8.5pt;
+    color: var(--brown-mid);
+  }
+
+  /* Two-col layout */
+  .two-col {
+    display: flex;
+    gap: 10px;
+  }
+  .two-col > * { flex: 1; }
+
+  /* Footer */
+  .page-footer {
+    border-top: 1.5px solid var(--sand);
+    padding-top: 4px;
+    margin-top: auto;
+    font-size: 7pt;
+    color: var(--brown-light);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Compact helper */
+  .compact-list {
+    font-size: 8.5pt;
+    line-height: 1.35;
+    padding-left: 14px;
+    margin-bottom: 4px;
+  }
+  .compact-list li { margin-bottom: 2px; }
+
+  /* Section divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--sand);
+    margin: 8px 0;
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white; }
+    .page {
+      width: auto;
+      min-height: auto;
+      max-height: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== FRONT SIDE ==================== -->
+<div class="page">
+
+  <div class="page-header">
+    <div>
+      <div class="page-label">Workshop Handout — Front</div>
+      <h1>GitHub 2.0: The Handoff</h1>
+    </div>
+    <div class="subtitle">The Upskilling Labs &bull; Both partners do everything</div>
+  </div>
+
+  <!-- The Loop -->
+  <div class="loop-diagram">
+    <div class="flow-line">YOU build → push to GitHub → PARTNER clones, branches, edits → opens PR → YOU review &amp; merge → pull back</div>
+    <div class="flow-line" style="margin-top:2px;">PARTNER builds → push to GitHub → YOU clone, branch, edit → open PR → PARTNER reviews &amp; merge → pull back</div>
+    <div class="loop-note">Two full loops running in parallel. The page is bait — the process is the deliverable.</div>
+  </div>
+
+  <!-- Round 1 -->
+  <div class="section-head">
+    <span class="round-badge r1">1</span>
+    <h2>Build &amp; Ship</h2>
+    <span class="time">~15 min</span>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Build</div>
+      <div class="step-detail">Paste your filled-in Prompt&nbsp;1 into Replit. Let the Agent build. Don't iterate.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Push</div>
+      <div class="step-detail">Git pane → Stage all → Commit → Push. Repo name: <code style="font-size:7pt;">&lt;yourname&gt;-handoff-lab</code> — <strong>PUBLIC</strong>.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Confirm</div>
+      <div class="step-detail">Go to GitHub.com. See your code on <code>main</code>?</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Prompt Doc</div>
+      <div class="step-detail">On GitHub: Add file → <code style="font-size:7pt;">prompts/scaffold-prompt.md</code> → paste your prompt → commit.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-title">Invite</div>
+      <div class="step-detail">Settings → Collaborators → add your partner's GitHub username.</div>
+    </div>
+  </div>
+
+  <!-- Prompt 1 Reference -->
+  <div class="prompt-block">
+    <strong style="color:#E7C39A;">Prompt 1 — Fill in Your Blanks</strong> (full version in Google Drive)<br><br>
+    Build a single-page personal website. Keep it SIMPLE: one page, no routing, no backend, no forms.<br><br>
+    The page is for: <span class="blank">___________</span> &nbsp;|&nbsp; Headline: "<span class="blank">___________</span>"<br>
+    One sentence about me: "<span class="blank">___________</span>"<br>
+    Three Things About Me cards: <span class="blank">___________</span>, <span class="blank">___________</span>, <span class="blank">___________</span><br>
+    Color mood: <span class="blank">___________</span> &nbsp;|&nbsp; Footer: "Built at The Upskilling Labs — GitHub 2.0 Workshop"<br><br>
+    <span style="color:#A7BEAE;">Keep all text easy to find in the code. No extra pages, animations, or heavy libraries.</span>
+  </div>
+
+  <div class="checkpoint">
+    <span class="checkpoint-icon">✓</span>
+    <span>Both partners: repo live on GitHub, prompt doc committed, collaborator invite sent AND accepted.</span>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Round 2 -->
+  <div class="section-head">
+    <span class="round-badge r2">2</span>
+    <h2>Clone, Branch, and Edit Your Partner's Code</h2>
+    <span class="time">~20 min</span>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Accept</div>
+      <div class="step-detail">Accept your partner's collaborator invite (check email / GitHub notifications).</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Clone</div>
+      <div class="step-detail">GitHub Desktop: File → Clone → find your <em>partner's</em> repo.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Branch</div>
+      <div class="step-detail">Current Branch → New Branch → <code style="font-size:7pt;">feature/&lt;yourname&gt;-edit</code>. <strong>Confirm you're NOT on main.</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Read</div>
+      <div class="step-detail">Open <code style="font-size:7pt;">prompts/scaffold-prompt.md</code> — your map to the code.</div>
+    </div>
+  </div>
+
+  <div class="shortcut-bar">
+    <span>🔍</span>
+    <span class="keys">Ctrl+Shift+F</span> / <span class="keys">Cmd+Shift+F</span>
+    <span class="desc">Project-wide search — finds any text across all files. Your most important VS Code skill for unfamiliar code.</span>
+  </div>
+
+  <!-- Change Menu -->
+  <div class="section-head" style="margin-top:4px;">
+    <h2 style="font-size:10.5pt;">The Change Menu — Pick ONE</h2>
+  </div>
+
+  <div class="change-menu">
+    <div class="menu-option opt1">
+      <div class="opt-header" style="color:var(--sage-dark);">⭐ Text Swap</div>
+      <div class="opt-body">Use project-wide search to find the headline. Change it to something new. Save.</div>
+    </div>
+    <div class="menu-option opt2">
+      <div class="opt-header" style="color:#B8860B;">⭐⭐ Add a Fourth Card</div>
+      <div class="opt-body">Find a "Three Things" card in the code. Copy the block, paste below, edit the text.</div>
+    </div>
+    <div class="menu-option opt3">
+      <div class="opt-header" style="color:var(--terracotta);">⭐⭐⭐ AI Color Change</div>
+      <div class="opt-body">Find color hex values. Ask your AI assistant how to shift the palette. Save the exchange as <code style="font-size:7pt;">prompts/edit-1.md</code>.</div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-title">Edit</div>
+      <div class="step-detail">Make your change in VS Code. Save (Ctrl/Cmd+S).</div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-title">Commit</div>
+      <div class="step-detail">GitHub Desktop: write a message with context.<br><em style="font-size:7pt;">"Change headline — hand-edited"</em></div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-title">Push</div>
+      <div class="step-detail">Click "Publish branch" to push your branch to GitHub.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-title">Open PR</div>
+      <div class="step-detail">GitHub.com → yellow banner → "Compare &amp; pull request." Title + one-sentence description.</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <span class="checkpoint-icon">✓</span>
+    <span>Both partners: Pull Request open on your partner's repo. You should see the yellow banner on GitHub.com.</span>
+  </div>
+
+  <div class="page-footer">
+    <span>The Upskilling Labs — GitHub 2.0: The Handoff</span>
+    <span>▸ FLIP FOR: Round 3 &bull; Handoff Protocol &bull; Troubleshooting</span>
+  </div>
+</div>
+
+<!-- ==================== BACK SIDE ==================== -->
+<div class="page">
+
+  <div class="page-header">
+    <div>
+      <div class="page-label">Workshop Handout — Back</div>
+      <h1>GitHub 2.0: The Handoff</h1>
+    </div>
+    <div class="subtitle">Review &bull; Protocol &bull; Troubleshooting &bull; Next Steps</div>
+  </div>
+
+  <!-- Round 3 -->
+  <div class="section-head">
+    <span class="round-badge r3">3</span>
+    <h2>Review, Merge, and Sync Back</h2>
+    <span class="time">~12 min</span>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Open PR</div>
+      <div class="step-detail">Go to YOUR repo on GitHub.com. You have a PR from your partner.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Review</div>
+      <div class="step-detail">Click "Files changed." Green = added. Red = removed. This is the diff.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Comment</div>
+      <div class="step-detail">Click a line number to comment on a specific line. Even "Looks good!" counts.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Merge</div>
+      <div class="step-detail">"Merge pull request" → Confirm → "Delete branch."</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-title">Sync</div>
+      <div class="step-detail">In Replit: Git pane → Pull. Your partner's change appears in your project.</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <span class="checkpoint-icon">✓</span>
+    <span>Loop complete. Code round-tripped: Builder → GitHub → Partner → Branch → PR → Main → Builder. Nothing broke.</span>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Handoff Protocol -->
+  <div class="section-head" style="margin-top: 6px;">
+    <h2 style="font-family: Cambria, Georgia, serif; font-size: 13pt; color: var(--terracotta);">The Handoff Protocol</h2>
+    <span class="time" style="font-style: italic;">Your build-cycle working agreement — keep this</span>
+  </div>
+
+  <table class="protocol-table">
+    <tr>
+      <td class="rule-num warm">1</td>
+      <td class="rule-text"><strong>Main always works.</strong> No direct commits to main. Ever.</td>
+    </tr>
+    <tr>
+      <td class="rule-num warm">2</td>
+      <td class="rule-text"><strong>Branch first, then edit.</strong> Check the branch indicator before you type.</td>
+    </tr>
+    <tr>
+      <td class="rule-num warm">3</td>
+      <td class="rule-text"><strong>One branch = one person = one task.</strong> Descriptive names: <code>feature/...</code>, <code>fix/...</code></td>
+    </tr>
+    <tr>
+      <td class="rule-num earth">4</td>
+      <td class="rule-text"><strong>Every AI generation gets a prompt doc</strong> in <code>/prompts</code>, committed with the code.</td>
+    </tr>
+    <tr>
+      <td class="rule-num earth">5</td>
+      <td class="rule-text"><strong>Commits say who/how.</strong> Hand-edited vs. AI-generated, and which prompt doc to read.</td>
+    </tr>
+    <tr>
+      <td class="rule-num earth">6</td>
+      <td class="rule-text"><strong>All changes enter main through a Pull Request.</strong> At least one teammate reviews before merging.</td>
+    </tr>
+    <tr>
+      <td class="rule-num green">7</td>
+      <td class="rule-text"><strong>Pull before you start; push before you stop.</strong></td>
+    </tr>
+    <tr>
+      <td class="rule-num green">8</td>
+      <td class="rule-text"><strong>The builder tool is personal; the repo is shared.</strong> GitHub is where the team meets.</td>
+    </tr>
+  </table>
+
+  <hr class="divider">
+
+  <div class="two-col">
+    <!-- Troubleshooting -->
+    <div>
+      <div class="section-head" style="margin-top:0;">
+        <h2 style="font-size: 10.5pt;">When Things Go Wrong</h2>
+      </div>
+
+      <div class="trouble-item" style="margin-bottom:4px;">
+        <div class="problem">"I can't push"</div>
+        <div class="fix">Click <strong>Pull</strong> first (someone else pushed before you). Then push again.</div>
+      </div>
+      <div class="trouble-item" style="margin-bottom:4px;">
+        <div class="problem">Editing on main by accident</div>
+        <div class="fix">In GitHub Desktop: Branch menu → New Branch. Your uncommitted changes move to the new branch.</div>
+      </div>
+      <div class="trouble-item" style="margin-bottom:4px;">
+        <div class="problem">Can't find the text in the code</div>
+        <div class="fix">Use <strong>Ctrl/Cmd+Shift+F</strong> (project-wide search). Check <code>src/pages/</code> or <code>src/components/</code> first.</div>
+      </div>
+      <div class="trouble-item" style="margin-bottom:4px;">
+        <div class="problem">Collaborator invite not arriving</div>
+        <div class="fix">Check email spam folder. Or go to github.com/notifications directly.</div>
+      </div>
+      <div class="trouble-item" style="margin-bottom:4px;">
+        <div class="problem">Replit sync looks stale</div>
+        <div class="fix">Open Replit Git pane → Pull. If still stale, make a small commit on GitHub.com to nudge it.</div>
+      </div>
+      <div class="trouble-item" style="margin-bottom:4px;">
+        <div class="problem">Out of Replit credits</div>
+        <div class="fix">Ask a mentor for a backup repo. You can skip straight to Round 2 — nobody sits out.</div>
+      </div>
+    </div>
+
+    <!-- Right column: shortcuts, plan b, next steps -->
+    <div>
+      <div class="section-head" style="margin-top:0;">
+        <h2 style="font-size: 10.5pt;">Essential Shortcuts</h2>
+      </div>
+
+      <div style="font-size:8.5pt; margin-bottom:8px;">
+        <div style="margin-bottom:3px;"><code style="background:var(--sand-light); padding:1px 4px; border-radius:2px;">Ctrl/Cmd + Shift + F</code> — Search all files (VS Code)</div>
+        <div style="margin-bottom:3px;"><code style="background:var(--sand-light); padding:1px 4px; border-radius:2px;">Ctrl/Cmd + S</code> — Save file</div>
+        <div style="margin-bottom:3px;"><code style="background:var(--sand-light); padding:1px 4px; border-radius:2px;">Ctrl/Cmd + Z</code> — Undo last edit</div>
+        <div style="margin-bottom:3px;"><code style="background:var(--sand-light); padding:1px 4px; border-radius:2px;">.</code> on any GitHub repo — Open github.dev editor (Plan&nbsp;B!)</div>
+      </div>
+
+      <div class="tip" style="margin-bottom:8px;">
+        <span class="tip-icon">💡</span>
+        <span class="tip-text"><strong>Plan B: github.dev</strong><br>If your local tools break, press <code style="background:rgba(255,255,255,0.2); padding:0 3px; border-radius:2px;">.</code> on any GitHub repo page. Full VS Code opens in the browser — edit, commit, push. No install needed.</span>
+      </div>
+
+      <div class="section-head" style="margin-top:2px;">
+        <h2 style="font-size: 10.5pt;">Before Your First Build-Cycle Session</h2>
+      </div>
+
+      <ol style="font-size:8.5pt; padding-left:16px; line-height:1.45;">
+        <li style="margin-bottom:3px;">One teammate creates the team repo and invites everyone.</li>
+        <li style="margin-bottom:3px;">Everyone clones and does a test handoff — one commit <strong>on a branch</strong> with a PR.</li>
+        <li style="margin-bottom:3px;">Write your scaffold prompt together. Commit to <code>/prompts</code> before anyone builds.</li>
+        <li style="margin-bottom:3px;">Read the Handoff Protocol as a team. Out loud. These are your house rules.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>The Upskilling Labs — GitHub 2.0: The Handoff</span>
+    <span>Aaron McKeever &bull; Slack &bull; Drop-in time via Calendly</span>
+  </div>
+</div>
+
+</body>
+</html>
