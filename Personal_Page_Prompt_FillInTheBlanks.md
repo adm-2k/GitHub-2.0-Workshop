@@ -38,17 +38,11 @@ Field:          [YOUR FIELD OR AREA OF FOCUS — e.g., "Public Health" or "Educa
 About me (2-3 sentences, write naturally):
 [WRITE A SHORT BIO ABOUT YOURSELF. Keep it conversational. Example: "I'm a project manager based in DC who got into tech through community organizing. I'm learning to build tools that make local government more accessible. When I'm not at my laptop, I'm probably at a farmer's market."]
 
-Three things I'm excited about right now:
+Three things I'm excited about with the Upskilling Labs and/or my project:
 1. [FIRST THING — e.g., "Learning to ship real projects with a team"]
 2. [SECOND THING — e.g., "Figuring out how AI fits into my workflow"]
 3. [THIRD THING — e.g., "My neighborhood's community garden"]
 
-A quote or motto that resonates with me:
-"[YOUR QUOTE — e.g., "We don't have to engage in grand, heroic actions to participate in change." or "Ship it and iterate." or just something you like]"
-— [WHO SAID IT, or "me" if it's yours]
-
-One link (optional — a LinkedIn, a portfolio, a project, or leave blank):
-[YOUR URL or "none"]
 
 ─────────────────────────────────────────────
 COLOR PALETTE
@@ -83,7 +77,7 @@ Structure the page in this exact order, top to bottom:
    - Text should feel like a real paragraph, not a bullet list
 
 3. THREE THINGS SECTION
-   - A small section heading: "What I'm Into Right Now"
+   - A small section heading: "What I'm Interested in Building with The Upskilling Labs"
    - Display the three items as simple cards or a clean list
    - Each item gets a subtle container — a light border, a slight
      background tint, or a left-accent bar using the secondary color
