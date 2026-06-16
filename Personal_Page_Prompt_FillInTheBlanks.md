@@ -83,12 +83,7 @@ Structure the page in this exact order, top to bottom:
      background tint, or a left-accent bar using the secondary color
    - Keep the styling minimal and classy
 
-4. QUOTE SECTION
-   - The quote in italics, slightly larger than body text
-   - Attribution below the quote, smaller
-   - Center this section — it should feel like a pause in the page
-
-5. FOOTER
+4. FOOTER
    - If a link was provided, show it as a simple clickable link
    - A small line: "Built at The Upskilling Labs"
    - Use a slightly darker background or a subtle top border to
